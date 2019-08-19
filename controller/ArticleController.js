@@ -236,7 +236,7 @@ articleController.sendAllToMobile=(req,res)=>{
   ArticleR.affichertous().then((result)=>{
       result=JSON.stringify(result)
       result=JSON.parse(result);
-      res.send(result);
+      res.send({"statut":200,"articles":result);
   }).catch((err)=>{
       res.send({"statu":400,"articles":undefined});
   });
