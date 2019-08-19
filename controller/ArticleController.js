@@ -234,7 +234,7 @@ articleController.findById = (req,res,id)=>{
 };
 articleController.sendAllToMobile=(req,res)=>{
   ArticleR.affichertous().then((result)=>{
-      res.send({statu:200,articles:result});
+      res.send(result);
   }).catch((err)=>{
       res.send({"statu":400,"articles":undefined});
   });
