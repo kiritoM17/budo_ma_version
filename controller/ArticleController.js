@@ -234,9 +234,7 @@ articleController.findById = (req,res,id)=>{
 };
 articleController.sendAllToMobile=(req,res)=>{
   ArticleR.affichertous().then((result)=>{
-      let actu=JSON.stringify(result);
-      actu=JSON.parse(actu);
-      res.send({"statu":200,"articles":actu});
+      res.send({statu:200,articles:result});
   }).catch((err)=>{
       res.send({"statu":400,"articles":undefined});
   });
