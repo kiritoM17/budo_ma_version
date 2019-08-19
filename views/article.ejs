@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from materialwrap-html.authenticgoods.co/ecommerce-products.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 Aug 2019 11:38:06 GMT -->
+<head>
+  <%- include('partials/head'); -%>
+</head>
+
+<body>
+  <div id="app_wrapper">
+    <header id="app_topnavbar-wrapper">
+      <%- include('partials/header'); -%>
+    </header>
+    <%- include('partials/sidebar'); -%>
+      <section id="content_outer_wrapper">
+        <div id="content_wrapper" class="card-overlay">
+          <div id="header_wrapper" class="header-md ecom-header">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12">
+                  <header id="header">
+                    <h1>Articles</h1>
+                    <ol class="breadcrumb">
+                      <li><a href="index-2.html">Menu</a></li>
+                      <li><a href="javascript:void(0)" class="active">Gestion Article</a></li>
+                    </ol>
+                  </header>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="content" class="container-fluid">
+            <div class="content-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="card card-data-tables product-table-wrapper">
+                  <header class="card-heading">
+                    <h2 class="card-title">Gestion des Articles</h2>
+                    <small class="dataTables_info"></small>
+                    <div class="card-search">
+                      <div id="productsTable_wrapper" class="form-group label-floating is-empty">
+                        <i class="zmdi zmdi-search search-icon-left"></i>
+                        <input type="text" class="form-control filter-input" placeholder="Filter Products..." autocomplete="off">
+                        <a href="javascript:void(0)" class="close-search" data-card-search="close" data-toggle="tooltip" data-placement="top" title="Close"><i class="zmdi zmdi-close"></i></a>
+                      </div>
+                    </div>
+                    <ul class="card-actions icons right-top">
+                      <li id="deleteItems" style="display: none;">
+                        <span class="label label-info pull-left m-t-5 m-r-10 text-white"></span>
+                        <a href="javascript:void(0)" id="confirmDelete" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
+                          <i class="zmdi zmdi-delete"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0)" data-card-search="open" data-toggle="tooltip" data-placement="top" data-original-title="Filter Products">
+                          <i class="zmdi zmdi-search"></i>
+                        </a>
+                      </li>
+                      <li class="dropdown" data-toggle="tooltip" data-placement="top" data-original-title="Show Entries">
+                        <a href="javascript:void(0)" data-toggle="dropdown">
+                          <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+                        <div id="dataTablesLength">
+                        </div>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" data-original-title="Export All">
+                          <i class="zmdi zmdi-inbox"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </header>
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table id="productsTable" class="mdl-data-table product-table m-t-30" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th data-orderable="false" class="col-xs-2">Image</th>
+                            <th class="col-xs-2">Title</th>
+                            <th class="col-xs-2">Description</th>
+                            <th data-orderable="false" class="col-xs-2">Rubrique</th>
+                            <th class="col-xs-1">date de creation</th>
+                            <th data-orderable="false" class="col-xs-1">Status</th>
+                            <th data-orderable="false" class="col-xs-2">
+                              <button class="btn btn-primary btn-fab  animate-fab" data-toggle="modal" data-target="#article_add_modal"><i class="zmdi zmdi-plus"></i></button>
+                            </th>
+                            <th data-orderable="false" class="col-xs-1">
+                              
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                              if(articles.length>0){
+                                 for (let index = 0; index < articles.length; index++) {
+                                   articles[index]=JSON.stringify(articles[index]);
+                                articles[index]=JSON.parse(articles[index]);
+                            %>
+                          <tr>
+                            <td><img src="assets/imgages/actualite/<%=articles[index].photo_couverture.filename%>" alt="" class="img-thumbnai img-circlel" style="border-radius: 100%;width: 100px;height: 100px" /></td>
+                            <td><%=articles[index].titre %></td>
+                            <td><%=articles[index].descriptif %></td>
+                            <td><%=articles[index].rubrique %></td>
+                            <td><%=articles[index].date_publication %></td>
+                            <td>
+                              <div class="togglebutton">
+                                <%if(articles[index].statut == 'publier'){%>
+                                <label>
+                                  <input type="checkbox" class="toggle-info" checked readonly>
+                                </label>
+                                <%}else{%>
+                                    <label>
+                                      <input type="checkbox" class="toggle-info" readonly>
+                                    </label>
+                                  <%}%>
+                              </div>
+                            </td>
+
+                            <td class="hidden"><a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-camera-add"></i></a></td>
+                            <td class="checkbox-cell" >
+                              <a href="javascript:void(0)" class="icon delete-product" data-drawer="open-right-lg" onclick="loadAlbum('<%=articles[index]._id%>');"><i class="zmdi zmdi-camera-add"></i></a>
+                            </td>
+                          </tr>
+                          <%}}%>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="drawer-right-lg mw-lightGray drawer-fixed ecom-edit-panel">
+            <div class="drawer-content">
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                       Ajouter/Modifier Premiere Publicite
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                      <div class="card">
+                        <form action="/article/addPubImageFirst" enctype="multipart/form-data" method="post">
+                        <div class="card-body">
+                            <div class="form-group row">
+                             <input type="text" name="id_article" class="hidden" id="value_article">
+                            </div>
+                            <div class="form-group is-empty">
+                              <div class="input-group">
+                                <input type="file" name="corver_pub_1" class="form-control" accept="image/*" >
+                                <div class="input-group">
+                                  <input type="text" readonly=""  class="form-control" placeholder="Ajouter Image Publicitaire">
+                                  <span class="input-group-btn input-group-sm">
+                                    <button type="button" class="btn btn-success btn-sm">
+                                                 Importer
+                                    </button>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-lg center-block">Update</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                      <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Ajouter/Modifier Second Publicite
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                      <div class="card">
+                        <form action="/article/addPubImageSecond" enctype="multipart/form-data" method="post">
+                          <div class="card-body">
+                            <div class="form-group row">
+                              <input type="text" name="id_article" class="hidden" id="value_article_1">
+                            </div>
+                            <div class="form-group is-empty">
+                              <div class="input-group">
+                                <input type="file" name="corver_pub_2" class="form-control" accept="image/*" >
+                                <div class="input-group">
+                                  <input type="text" readonly=""  class="form-control" placeholder="Ajouter Image publicitaire">
+                                  <span class="input-group-btn input-group-sm">
+                                    <button type="button" class="btn btn-success btn-sm">
+                                                 Importer
+                                    </button>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-lg center-block">Update</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Update Photo de couverture
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                      <div class="card">
+                        <form action="/article/updateCoverImage" enctype="multipart/form-data" method="post">
+                          <div class="card-body">
+                            <div class="form-group row">
+                              <input type="text" name="id_article" class="hidden" id="value_article_2">
+                            </div>
+                            <div class="form-group is-empty">
+                              <div class="input-group">
+                                <input type="file" name="photo_couverture" class="form-control" accept="image/*" >
+                                <div class="input-group">
+                                  <input type="text" readonly=""  class="form-control" placeholder="Mettre a jour la photo de couverture">
+                                  <span class="input-group-btn input-group-sm">
+                                    <button type="button" class="btn btn-success btn-sm">
+                                                 Importer
+                                    </button>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-lg center-block">Update</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingFour">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Update Article Informations
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="panel-body">
+                      <div class="card">
+                        <form action="/article/updateArticleInformation"  method="post">
+                          <div class="card-body">
+                            <div class="form-group row">
+                              <input type="text" name="id_articles" class="hidden" id="value_article_3">
+                            </div>
+                            <div class="form-group row">
+                              <label class="sr-only">Titre de l'article : </label>
+                              <div class="col-md-12">
+                                <input type="text" class="form-control" name="titre" placeholder="Entrez le titre de l'article " autocomplete="off" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="sr-only">Status de l'article: </label>
+                              <div class="col-md-12">
+                                <label class="radio-inline">
+                                  <input type="radio" name="statut" id="male" value="redaction" checked>
+                                  Redaction
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="statut" id="female" value="publier">
+                                  Publier
+                                </label>
+                              </div>
+                            </div>
+                            <div class="form-group  row">
+                              <label class="sr-only">Descriptif</label>
+                              <div class="col-md-12">
+                                <input type="text" class="form-control" name="descriptif" placeholder="Ajoutez le descriptif" autocomplete="off" required>
+                              </div>
+                            </div>
+                            <div class="form-group  row">
+                              <label class="sr-only">Paragraphe 1: </label>
+                              <div class="col-md-12">
+                                <textarea class="form-control" name="text_1" rows="4" placeholder="Ecrivez le contenu du premier paragraphe"></textarea>
+                              </div>
+                            </div>
+                            <div class="form-group  row">
+                              <label class="sr-only">Paragraphe 2: </label>
+                              <div class="col-md-12">
+                                <textarea class="form-control" name="text_2" rows="4" placeholder="Ecrivez le contenu du second paragraphe" required></textarea>
+                              </div>
+                            </div>
+                            <div class="form-group  row">
+                              <label class="sr-only">Paragraphe 3: </label>
+                              <div class="col-md-12">
+                                <textarea class="form-control" name="text_3" rows="4" placeholder="Ecrivez le contenu du troisieme paragraphe" required></textarea>
+                              </div>
+                            </div>
+                            <div class="form-group-lg row">
+                              <div class="col-sm-12">
+                                <select name="rubrique" class="select form-control">
+                                  <option>choix de la rubrique</option>
+                                  <option value="judo">Judo</option>
+                                  <option value="karate">Karate</option>
+                                  <option value="naboudo">Nanboudo</option>
+                                  <option value="boxe">Boxe</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-lg center-block">Update</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingFive">
+                    <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Delete Option
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                    <div class="panel-body">
+                     <div class="row">
+                       <div class="col-sm-4 col-xs-3 col-md-4">
+                         <form method="post" action="/article/deletePubImageFirst">
+                           <input type="text" name="id_article" class="hidden" id="value_article_del_1" value="">
+                           <button class="btn btn-xs btn-warning "  type="submit">
+                             <small>first publicite </small>
+                           </button>
+                         </form>
+                       </div>
+                       <div class="col-sm-4 col-xs-3 col-md-4">
+                         <form method="post" action="/article/deleteArticle">
+                           <input type="text" name="id_article" class="hidden" id="value_article_del_2">
+                           <button class="btn btn-xs btn-default "  type="submit">
+                             <small>delete Article</small>
+                           </button>
+                         </form>
+                       </div>
+                       <div class="col-sm-4 col-xs-3 col-md-4">
+                         <form method="post" action="/article/deletePubImageSecond">
+                           <input type="text" name="id_article" class="hidden" id="value_article_del_3" value="">
+                           <button class="btn btn-xs btn-primary "  type="submit">
+                             <small>second publicite </small>
+                           </button>
+                         </form>
+                       </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </aside>
+    
+    <!--  Creation Article -->
+    
+      <div class="modal fade" id="article_add_modal" tabindex="-1" role="dialog" aria-labelledby="tab_modal">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header p-b-15">
+              <h4 class="modal-title">Nouvel Article</h4>
+              <ul class="card-actions icons right-top">
+                <a href="javascript:void(0)" data-dismiss="modal" class="text-white" aria-label="Close">
+                  <i class="zmdi zmdi-close"></i>
+                </a>
+              </ul>
+            </div>
+            <div class="modal-body p-0">
+              <div class="card-body">
+                <form method="post" enctype="multipart/form-data" action="/article/add" class="col-sm-12">
+                  <div class="form-group row">
+                    <label class="sr-only">Titre de l'article : </label>
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" name="titre" placeholder="Entrez le titre de l'article " autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="sr-only">Status de l'article: </label>
+                    <div class="col-md-12">
+                      <label class="radio-inline">
+                        <input type="radio" name="statut" id="male" value="redaction" checked>
+                        Redaction
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="statut" id="female" value="publier">
+                        Publier
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group is-empty">
+                    <div class="input-group">
+                      <input type="file" name="photo_couverture" class="form-control" accept="image/*" >
+                      <div class="input-group">
+                        <input type="text" readonly=""  class="form-control" placeholder="Ajouter la photo de couverture">
+                        <span class="input-group-btn input-group-sm">
+                          <button type="button" class="btn btn-success btn-sm">
+                                       Importer
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group  row">
+                    <label class="sr-only">Descriptif</label>
+                    <div class="col-md-12">
+                      <input type="text" class="form-control" name="descriptif" placeholder="Ajoutez le descriptif" autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="form-group  row">
+                    <label class="sr-only">Paragraphe 1: </label>
+                    <div class="col-md-12">
+                      <textarea class="form-control" name="text_1" rows="4" placeholder="Ecrivez le contenu du premier paragraphe"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group  row">
+                    <label class="sr-only">Paragraphe 2: </label>
+                    <div class="col-md-12">
+                      <textarea class="form-control" name="text_2" rows="4" placeholder="Ecrivez le contenu du second paragraphe"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group  row">
+                    <label class="sr-only">Paragraphe 3: </label>
+                    <div class="col-md-12">
+                      <textarea class="form-control" name="text_3" rows="4" placeholder="Ecrivez le contenu du troisieme paragraphe"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-12">
+                      <select name="rubrique" class="select form-control">
+                        <option>choix de la rubrique</option>
+                        <option>choix de la rubrique</option>
+                        <option value="judo">Judo</option>
+                        <option value="karate">Karate</option>
+                        <option value="naboudo">Nanboudo</option>
+                        <option value="boxe">Boxe</option>
+                      </select>
+                    </div>
+                  </div>
+              </div>
+            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+          </form>
+          </div>
+            </div>
+            <!-- modal-content -->
+          </div>
+          <!-- modal-dialog -->
+        </div>
+        <script src="assets/js/vendor.bundle.js"></script>
+        <script src="assets/js/app.bundle.js"></script>
+          <script>
+            function loadAlbum(id) {
+              console.log(id);
+              document.getElementById('value_article').value=id;
+              document.getElementById('value_article_1').value=id;
+              document.getElementById('value_article_2').value=id;
+              document.getElementById('value_article_3').value=id;
+              document.getElementById('value_article_del_1').value=id;
+              document.getElementById('value_article_del_2').value=id;
+              document.getElementById('value_article_del_3').value=id;
+              console.log(document.getElementById('value_article_3').value + " <=id de la section");
+             /* $.ajax({
+                url: "test.html",
+                cache: false,
+                success: function(result){
+                  console.log(result);
+                }
+              });*/
+            }
+          </script>
+        </div>
+      </section>
+  </div>
+</body>
+      
+      
+<!-- Mirrored from materialwrap-html.authenticgoods.co/ecommerce-products.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 Aug 2019 11:39:31 GMT -->
+</html>

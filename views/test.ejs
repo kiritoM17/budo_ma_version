@@ -1,0 +1,22 @@
+<%
+if(articles.length>0){
+for (let index = 0; index < articles.length; index++) {
+    //articles[index]=JSON.stringify(articles[index],null,4);
+%>
+<tr>
+    <td><img src="<%=articles[index].photo_couverture%>" alt="" class="img-thumbnail" /></td>
+    <td><%=articles[index].titre %></td>
+    <td>
+        <div class="togglebutton">
+            <label>
+                <input type="checkbox" class="toggle-info" checked>
+            </label>
+        </div>
+    </td>
+
+    <td><a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a></td>
+    <td class="checkbox-cell">
+        <a href="javascript:void(0)" class="icon delete-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a>
+    </td>
+</tr>
+<%}}%>
