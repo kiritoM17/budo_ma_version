@@ -250,7 +250,7 @@ articleController.sendAllToMobileByRubrique=(req,res)=>{
   };
   //envoyer sur mobile les articless en fonction de l'id
 articleController.sendAllToMobileById=(req,res)=>{
-    ArticleR.afficherParRubrique(req.params.id).then((result)=>{
+    ArticleR.afficherParId(req.params.id).then((result)=>{
         res.json({"statu":200,"articles":result});
     }).catch((err)=>{
         res.json({"statu":400,"articles":undefined});
