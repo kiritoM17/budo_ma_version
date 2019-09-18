@@ -232,13 +232,24 @@ articleController.findById = (req,res,id)=>{
   });
     res.redirect('/article');
 };
+//envoyer sur mobile tout les articles
 articleController.sendAllToMobile=(req,res)=>{
   ArticleR.affichertous().then((result)=>{
       let actu=JSON.stringify(result);
       actu=JSON.parse(actu);
-      res.send({"statu":200,"articles":actu});
+      res.JSON({"statu":200,"articles":actu});
   }).catch((err)=>{
-      res.send({"statu":400,"articles":undefined});
+      res.JSON({"statu":400,"articles":undefined});
   });
 };
+//envoyer sur mobile les articless en fonction de la rubrique
+articleController.sendAllToMobileByRubrique=(req,res)=>{
+    ArticleR.afficherParRubrique(req.params.rubrique).then((result)=>{
+        let actu=JSON.stringify(result);
+        actu=JSON.parse(actu);
+        res.JSON({"statu":200,"articles":actu});
+    }).catch((err)=>{
+        res.JSON({"statu":400,"articles":undefined});
+    });
+  };
 module.exports=articleController;

@@ -6,6 +6,7 @@ let articleController = require('./../controller/ArticleController');
 //get route
 router.get('/',articleController.index);
 router.get('/getAllArticle',articleController.sendAllToMobile);
+router.get('/getAllArticleRubrique/:rubrique',articleController.sendAllToMobileByRubrique);
 //create route
 router.post('/add',articleController.addArticle);
 //update route

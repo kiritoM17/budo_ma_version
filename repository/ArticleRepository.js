@@ -8,6 +8,14 @@ class ArticleRepository{
             cb(mayHaveError);
         });
      }
+     //fonction qui recherche tous les article en fonction de la rubrique
+     async afficherParRubrique(rubrique) {
+        let result =await  mongoose.model('Article')
+           .find({ rubrique: rubrique})
+           .exec();
+        console.log(result);
+        return result;
+     }
      //fonction qui retourne tous les projets
     async affichertous() {
        let result =await  mongoose.model('Article')
@@ -34,7 +42,7 @@ afficherAvecLimit(lm) {
             console.log(err);
         });
      }
- //fonction qui supprimer
+ //fonction qui modifie
  Modifier(id,update) {
     return mongoose.model('Article').findByIdAndUpdate(id,update);
  }
