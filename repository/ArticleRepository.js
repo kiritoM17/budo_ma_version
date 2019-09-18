@@ -16,6 +16,14 @@ class ArticleRepository{
         console.log(result);
         return result;
      }
+     //afficher par id
+     async afficherParId(id) {
+        let result =await  mongoose.model('Article')
+           .findById(id)
+           .exec();
+        console.log(result);
+        return result;
+     }
      //fonction qui retourne tous les projets
     async affichertous() {
        let result =await  mongoose.model('Article')
