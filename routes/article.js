@@ -1,13 +1,16 @@
 var express = require('express');
 var router = express.Router();
 let articleController = require('./../controller/ArticleController');
-
+cors = require('cors');
+var corsOptions = {
+    origin: '*'
+  };
 /* GET article page. */
 //get route
 router.get('/',articleController.index);
-router.get('/getAllArticle',articleController.sendAllToMobile);
-router.get('/getAllArticleRubrique/:rubrique',articleController.sendAllToMobileByRubrique);
-router.get('/getAllArticleId/:id',articleController.sendAllToMobileById);
+router.get('/getAllArticle',cors(corsOptions),articleController.sendAllToMobile);
+router.get('/getAllArticleRubrique/:rubrique', cors(corsOptions),articleController.sendAllToMobileByRubrique);
+router.get('/getAllArticleId/:id', cors(corsOptions),articleController.sendAllToMobileById);
 //create route
 router.post('/add',articleController.addArticle);
 //update route
